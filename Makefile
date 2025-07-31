@@ -32,4 +32,4 @@ bench_map_1_lam:
 bench_foreach:
 	$(MAKE) bench.run BENCH_CLASS=ForeachBenchmark RESULT_FILE=analysis/data/bench_foreach.csv
 
-bench.all: bench_map_1 bench_map_1_lam bench_foreach
+bench_all: bench_map_1 bench_map_1_lam bench_foreach

@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run all benchmarks
-        run: make bench.all
+        run: make bench_all
 
       - name: Upload all benchmark results
         uses: actions/upload-artifact@v4
