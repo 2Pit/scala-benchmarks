@@ -11,3 +11,7 @@
 "benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,84185557.412759,460952.749603,"ops/s",16
 "benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,14531223.043291,137825.795466,"ops/s",128
 "benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,3644083.047154,10747.504730,"ops/s",512
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,1875776.124918,5123.576522,"ops/s",1000
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,187208.653872,1046.451908,"ops/s",10000
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,566480.963265,5444.968179,"ops/s",1000
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,187025.077839,1639.106953,"ops/s",10000

@@ -7,26 +7,18 @@ jobs:
   benchmark:
     runs-on: ubuntu-latest
 
+    container:
+      image: sbtscala/scala-sbt:eclipse-temurin-21.0.7_6_1.11.3_3.7.1
+
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-
-      - name: Set up SBT
-        uses: coursier/setup-action@v1
-        with:
-          apps: sbt
-
-      - name: Run all benchmarks via Makefile
+      - name: Run all benchmarks
         run: make bench.all
 
-      - name: Upload benchmark results
+      - name: Upload all benchmark results
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-results
-          path: analysis/data/*.csv
+          path: analysis/data/
