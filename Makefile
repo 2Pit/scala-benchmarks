@@ -2,13 +2,14 @@
 FORKS := 3
 
 # Размеры
-SIZES_SHORT := 0,1,4,8,16,32,64,128,256,512
+# SIZES_SHORT := 0,1,4,8,16,32,64,128,256,512
+SIZES_SHORT := 0,1,4,16,128,512
 SIZES_LONG  := 1000,10000
 
 # Время выполнения для маленьких и больших сайзов
 WARMUP_ITER      := 4
 WARMUP_TIME_SHORT  := 1s
-WARMUP_TIME_LONG   := 5s
+WARMUP_TIME_LONG   := 2s
 
 MEASURE_ITER     := 6
 MEASURE_TIME_SHORT := 3s
