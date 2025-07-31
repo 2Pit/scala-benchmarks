@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -21,11 +22,11 @@ jobs:
         with:
           apps: sbt
 
-      - name: Run benchmarks via Makefile
-        run: make bench_map_1
+      - name: Run all benchmarks via Makefile
+        run: make bench.all
 
       - name: Upload benchmark results
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-results
-          path: analysis/bench_map_1.csv
+          path: analysis/data/*.csv

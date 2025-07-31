@@ -1,11 +1,13 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
-"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,2088078954.325583,292294421.726045,"ops/s",0
-"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,1166728343.050013,214847714.212279,"ops/s",1
-"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,614421838.004564,1513968.383967,"ops/s",10
-"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,130020775.179688,862899.879412,"ops/s",100
-"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,1438534.926369,22403.649566,"ops/s",10000
-"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,457280462.158208,11335644.543129,"ops/s",0
-"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,316239840.482911,2772194.790915,"ops/s",1
-"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,210283921.444353,1443119.866112,"ops/s",10
-"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,53887505.643573,667401.035091,"ops/s",100
-"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,649231.828734,5021.894021,"ops/s",10000
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,1960180425.915263,3792838.091766,"ops/s",0
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,824255076.871446,11570767.517179,"ops/s",1
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,416543686.722164,3254688.356125,"ops/s",4
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,110317786.540479,38907682.493578,"ops/s",16
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,14606576.661890,87369.346612,"ops/s",128
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,3642801.686714,71267.636622,"ops/s",512
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,238016472.522921,1320166.643764,"ops/s",0
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,188240088.950682,957970.559015,"ops/s",1
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,153224500.783509,1065157.806945,"ops/s",4
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,84185557.412759,460952.749603,"ops/s",16
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,14531223.043291,137825.795466,"ops/s",128
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,3644083.047154,10747.504730,"ops/s",512
