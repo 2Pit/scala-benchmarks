@@ -8,6 +8,8 @@ import scala.compiletime.uninitialized
 import scala.reflect.ClassTag
 
 @State(Scope.Thread)
+@BenchmarkMode(Array(Mode.AverageTime))
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 class ForeachBenchmark:
 
   @Param(Array("0", "1", "10", "100", "10000"))
