@@ -11,6 +11,9 @@ jobs:
       image: sbtscala/scala-sbt:eclipse-temurin-21.0.7_6_1.11.3_3.7.1
 
     steps:
+      - name: Install make
+        run: apt-get update && apt-get install -y make
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
