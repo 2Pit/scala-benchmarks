@@ -12,7 +12,7 @@ import scala.reflect.ClassTag
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 class ForeachBenchmark:
 
-  @Param(Array("0", "1", "10", "100", "10000"))
+  @Param(Array("1", "10", "100", "10000"))
   var size: Int = uninitialized
 
   var array: Array[Int] = uninitialized
