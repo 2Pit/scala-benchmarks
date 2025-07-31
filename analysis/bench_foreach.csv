@@ -1,0 +1,11 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,2088078954.325583,292294421.726045,"ops/s",0
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,1166728343.050013,214847714.212279,"ops/s",1
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,614421838.004564,1513968.383967,"ops/s",10
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,130020775.179688,862899.879412,"ops/s",100
+"benchmarks.ForeachBenchmark.new_foreach","thrpt",1,6,1438534.926369,22403.649566,"ops/s",10000
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,457280462.158208,11335644.543129,"ops/s",0
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,316239840.482911,2772194.790915,"ops/s",1
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,210283921.444353,1443119.866112,"ops/s",10
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,53887505.643573,667401.035091,"ops/s",100
+"benchmarks.ForeachBenchmark.old_foreach","thrpt",1,6,649231.828734,5021.894021,"ops/s",10000
