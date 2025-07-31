@@ -31,32 +31,3 @@ class ForeachBenchmark:
   @Benchmark
   def new_foreach(bh: Blackhole): Unit =
     array.newForeach(heavy.andThen(bh.consume))
-
-extension [A](xs: Array[A]) {
-
-  def oldForeach[U](f: A => U): Unit = {
-    val len = xs.length
-    var i = 0
-    (xs: Any @unchecked) match {
-      case xs: Array[AnyRef]  => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Int]     => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Double]  => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Long]    => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Float]   => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Char]    => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Byte]    => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Short]   => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-      case xs: Array[Boolean] => while (i < len) { f(xs(i).asInstanceOf[A]); i = i + 1 }
-    }
-  }
-
-  def newForeach[B](f: A => B)(implicit ct: ClassTag[B]): Unit = {
-    val len = xs.length
-    var i = 0
-    while (i < len) {
-      f(xs(i))
-      i += 1
-    }
-  }
-
-}

@@ -10,7 +10,7 @@ import scala.reflect.ClassTag
 @State(Scope.Thread)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-class MapBenchmark:
+class Map3Benchmark:
 
   @Param(Array("1", "4", "8", "16", "32", "64", "128", "256", "512", "1000", "10000"))
   var size: Int = uninitialized
@@ -29,9 +29,19 @@ class MapBenchmark:
   def heavy3(x: Int): Int = Math.sqrt(3 * x.toDouble).toInt
 
   @Benchmark
-  def old_map_1(bh: Blackhole): Unit =
-    bh.consume(array.oldMap(heavy))
+  def old_map_3(bh: Blackhole): Unit =
+    bh.consume(
+      array
+        .oldMap(heavy)
+        .oldMap(heavy2)
+        .oldMap(heavy3)
+    )
 
   @Benchmark
-  def new_map_1(bh: Blackhole): Unit =
-    bh.consume(array.newMap(heavy))
+  def new_map_3(bh: Blackhole): Unit =
+    bh.consume(
+      array
+        .newMap(heavy)
+        .newMap(heavy2)
+        .newMap(heavy3)
+    )

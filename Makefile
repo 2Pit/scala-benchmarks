@@ -1,44 +1,38 @@
-JFR_OUT      ?= benchmark.jfr
-WARMUP_ITER  ?= 2
-MEASURE_ITER ?= 3
-WARMUP_TIME  ?= 1s
-MEASURE_TIME ?= 5s
-FORKS        ?= 1
+# Размеры
+SIZES_SHORT := 1,4,8,16,32,64,128,256,512
+SIZES_LONG  := 1000,10000
 
-# JMH_REGEX    ?= .*FlatMappedIntBenchmark.*map.*
-JMH_REGEX    ?= .*ArrayBenchmark.flatMap3
+# Время выполнения для маленьких и больших сайзов
+MEASURE_ITER     := 3
+WARMUP_ITER      := 2
+MEASURE_TIME_SHORT := 1s
+WARMUP_TIME_SHORT  := 1s
+MEASURE_TIME_LONG  := 10s
+WARMUP_TIME_LONG   := 10s
 
-jfr:
-	rm -f $(JFR_OUT)
-	sbt ';clean;compile;jmh:run -i $(MEASURE_ITER) \
-	    -wi $(WARMUP_ITER) \
-	    -r $(MEASURE_TIME) \
-	    -w $(WARMUP_TIME) \
-	    -f$(FORKS) \
-	    -t1 \
-	    -jvmArgs "-XX:+FlightRecorder -XX:StartFlightRecording=filename=$(JFR_OUT),dumponexit=true,settings=profile,stackdepth=128" \
-	    $(JMH_REGEX)'
-	open -a "JDK Mission Control" $(JFR_OUT)
+# Кол-во форков
+FORKS := 1
 
-bench_map:
-	@JMH_REGEX='.*MapBenchmark.*'; \
-	sbt ';clean;compile;jmh:run -i $(MEASURE_ITER) \
-	             -wi $(WARMUP_ITER) \
-	             -r $(MEASURE_TIME) \
-	             -w $(WARMUP_TIME) \
-	             -f$(FORKS) \
-	             -t1 \
-	             '$$JMH_REGEX' \
-	             -rf csv -rff analysis/bench.csv'
+# Целевой CSV
+RESULT_FILE := analysis/bench_map_1.csv
+RESULT_TMP  := analysis/bench_map_1.tmp.csv
 
-
-bench_foreach:
-	@JMH_REGEX='.*ForeachBenchmark.*'; \
-	sbt ';clean;compile;jmh:run -i $(MEASURE_ITER) \
-	             -wi $(WARMUP_ITER) \
-	             -r $(MEASURE_TIME) \
-	             -w $(WARMUP_TIME) \
-	             -f$(FORKS) \
-	             -t1 \
-	             '$$JMH_REGEX' \
-	             -rf csv -rff /dev/stdout'
+# Основная цель
+bench_map_1:
+	rm -f $(RESULT_FILE) $(RESULT_TMP); \
+	echo "Running short sizes..."; \
+	sbt 'jmh:run -i $(MEASURE_ITER) -wi $(WARMUP_ITER) \
+	             -r $(MEASURE_TIME_SHORT) -w $(WARMUP_TIME_SHORT) \
+	             -f$(FORKS) -t1 \
+	             ".*MapBenchmark.*" \
+	             -p size=$(SIZES_SHORT) \
+	             -rf csv -rff $(RESULT_FILE)' || exit $$?; \
+	echo "Running long sizes..."; \
+	sbt 'jmh:run -i $(MEASURE_ITER) -wi $(WARMUP_ITER) \
+	             -r $(MEASURE_TIME_LONG) -w $(WARMUP_TIME_LONG) \
+	             -f$(FORKS) -t1 \
+	             ".*MapBenchmark.*" \
+	             -p size=$(SIZES_LONG) \
+	             -rf csv -rff $(RESULT_TMP)' || exit $$?; \
+	tail -n +2 $(RESULT_TMP) >> $(RESULT_FILE); \
+	rm -f $(RESULT_TMP)
