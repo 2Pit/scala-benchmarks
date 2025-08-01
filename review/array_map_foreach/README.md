@@ -88,8 +88,9 @@ old_map_1_lam:   latency = (4.985 ± 1.155) + (2.884 ± 0.086) · size    [RMSE 
 ```
 
 **Conclusion**:
-The `map_1` results confirm the same pattern: the new version is significantly faster per element when inlining is likely possible.
-This benefit vanishes in the lambda version (`map_1_lam`), further supporting the idea that lambdas block optimizations.
+The `map_1` results show a clear performance benefit in the new version: the latency per element is in `3.5` times lower.
+This effect is likely due to the fact that the new implementation allows the compiler to generate more efficient code when the transformation function has a known, concrete type (such as `Int => Int`).
+In contrast, when a lambda is used (`map_1_lam`), the function is opaque to the compiler, and this optimization no longer applies — the slopes become nearly identical.
 
 ---
 
@@ -105,8 +106,10 @@ old_map_3:       latency = (29.161 ± 4.795) + (24.296 ± 0.336) · size    [RMS
 ```
 
 **Conclusion**:
-A major performance gain is observed in `map_3` as well — the slope drops by more than 20 ns per element.
-This reinforces the conclusion that compiler-assisted optimization plays a key role.
+The `map_3` benchmark applies three sequential map operations, each with a different transformation.
+In the new version, the slope (latency per element) increases approximately threefold compared to `map_1`, which is expected given the triple application of map.
+However, the old implementation shows a much steeper increase in latency, suggesting that its more complex internal logic scales worse when multiple transformations are chained.
+This highlights that the simpler structure of the new implementation not only improves baseline performance, but also scales more predictably.
 
 ---
 
@@ -127,6 +130,7 @@ how many times slower the old version is compared to the new one.
 
 ## ✅ Conclusions
 
-- Optimizations introduced in the "new" versions significantly reduce the per-element latency in all cases **except** where lambdas are passed.
-- This strongly suggests that **compiler optimizations such as inlining or specialization are not applied to lambda-passed functions**.
-- When writing performance-critical code, prefer **direct call sites** or **specialized code paths** over generic lambdas.
+- The "new" implementations consistently demonstrate lower per-element latency compared to the original versions — **but only when the transformation function has a concrete, primitive-specific type**.
+- This performance gain disappears when **lambdas are used**, as they prevent the compiler from selecting the most efficient code paths.
+- In performance-sensitive contexts, prefer **direct method references** or **type-specialized functions** over generic lambdas.
+- Additionally, the old implementation exhibits **less predictable scaling** when multiple transformations (e.g., chained `map` calls) are applied. Its internal structure appears to introduce increasing overhead that grows faster than linearly, unlike the simpler and more stable behavior of the new implementation.
