@@ -39,5 +39,3 @@ bench_foreach_lam:
 	$(MAKE) bench.run BENCH_CLASS=ForeachLamBenchmark RESULT_FILE=analysis/data/bench_foreach_lam.csv
 
 bench_all: bench_map_1 bench_map_1_lam bench_foreach bench_foreach_lam
-
-bench_custom: bench_map_1 bench_map_3 bench_foreach

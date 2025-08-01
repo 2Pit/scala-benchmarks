@@ -2,10 +2,15 @@ name: Run Benchmarks
 
 on:
   workflow_dispatch:
+    inputs:
+      targets:
+        description: "Benchmark targets (e.g. 'bench_all bench_foreach')"
+        required: true
+        default: "bench_all"
+        type: string
 
 jobs:
-  bench-all:
-    name: Bench All
+  benchmark:
     runs-on: ubuntu-latest
     container:
       image: sbtscala/scala-sbt:eclipse-temurin-21.0.7_6_1.11.3_3.7.1
@@ -17,33 +22,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run all benchmarks
-        run: make bench_all
+      - name: Run selected benchmarks
+        run: |
+          echo "Targets: ${{ github.event.inputs.targets }}"
+          for target in ${{ github.event.inputs.targets }}; do
+            echo "▶ Running $target"
+            make $target
+          done
 
-      - name: Upload all results
+      - name: Upload benchmark results
         uses: actions/upload-artifact@v4
         with:
-          name: bench-all-results
-          path: analysis/data/
-
-  bench-custom:
-    name: Bench Custom
-    runs-on: ubuntu-latest
-    container:
-      image: sbtscala/scala-sbt:eclipse-temurin-21.0.7_6_1.11.3_3.7.1
-
-    steps:
-      - name: Install make
-        run: apt-get update && apt-get install -y make
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run custom benchmarks
-        run: make bench_custom
-
-      - name: Upload custom results
-        uses: actions/upload-artifact@v4
-        with:
-          name: bench-custom-results
+          name: benchmark-results
           path: analysis/data/
