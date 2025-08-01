@@ -1,0 +1,15 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,6.512089,0.040107,"ns/op",1
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,16.614206,0.168457,"ns/op",4
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,26.259445,0.058189,"ns/op",16
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,104.856444,0.438656,"ns/op",128
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,415.501922,1.107798,"ns/op",512
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,11.007093,0.079800,"ns/op",1
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,15.252010,0.043471,"ns/op",4
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,45.505554,0.241717,"ns/op",16
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,368.434711,0.475383,"ns/op",128
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,1463.974808,6.607062,"ns/op",512
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,896.772921,2.429935,"ns/op",1000
+"benchmarks.MapBenchmark.new_map_1","avgt",1,6,9423.314051,34.327623,"ns/op",10000
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,3002.509092,2.989174,"ns/op",1000
+"benchmarks.MapBenchmark.old_map_1","avgt",1,6,30376.071025,18.883715,"ns/op",10000

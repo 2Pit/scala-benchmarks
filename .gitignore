@@ -30,3 +30,8 @@ metals.sbt
 .idea
 .idea_modules
 /.worksheet/
+
+
+analysis/data/*
+analysis/plots/*
+analysis/venv/*

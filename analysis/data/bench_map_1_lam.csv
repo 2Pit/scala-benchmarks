@@ -1,0 +1,15 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,7.870876,0.029185,"ns/op",1
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,11.406034,0.041967,"ns/op",4
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,45.620138,0.040368,"ns/op",16
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,363.579320,0.223772,"ns/op",128
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,1826.649959,8.938220,"ns/op",512
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,10.274502,0.027336,"ns/op",1
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,14.704347,0.024512,"ns/op",4
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,45.606577,0.251821,"ns/op",16
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,366.485212,0.269519,"ns/op",128
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,1450.538761,1.770209,"ns/op",512
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,3689.607075,6.611058,"ns/op",1000
+"benchmarks.MapLamBenchmark.new_map_1_lam","avgt",1,6,30324.650224,43.930748,"ns/op",10000
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,2988.435891,4.592751,"ns/op",1000
+"benchmarks.MapLamBenchmark.old_map_1_lam","avgt",1,6,30357.006660,25.066200,"ns/op",10000
