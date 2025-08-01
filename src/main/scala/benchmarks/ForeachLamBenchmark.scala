@@ -10,7 +10,7 @@ import scala.reflect.ClassTag
 @State(Scope.Thread)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-class ForeachBenchmark:
+class ForeachLamBenchmark:
 
   @Param(Array("1", "10", "100", "10000"))
   var size: Int = uninitialized
@@ -28,8 +28,8 @@ class ForeachBenchmark:
 
   @Benchmark
   def old_foreach(bh: Blackhole): Unit =
-    array.oldForeach(bh.consume)
+    array.oldForeach(heavy.andThen(bh.consume))
 
   @Benchmark
   def new_foreach(bh: Blackhole): Unit =
-    array.newForeach(bh.consume)
+    array.newForeach(heavy.andThen(bh.consume))

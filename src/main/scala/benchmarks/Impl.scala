@@ -27,12 +27,10 @@ extension [A](xs: Array[A]) {
   def newMap[B](f: A => B)(implicit ct: ClassTag[B]): Array[B] = {
     val len = xs.length
     val ys = new Array[B](len)
-    if (len > 0) {
-      var i = 0
-      while (i < len) {
-        ys(i) = f(xs(i))
-        i += 1
-      }
+    var i = 0
+    while (i < len) {
+      ys(i) = f(xs(i))
+      i += 1
     }
     ys
   }

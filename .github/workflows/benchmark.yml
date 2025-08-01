@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  benchmark:
+  bench-all:
+    name: Bench All
     runs-on: ubuntu-latest
-
     container:
       image: sbtscala/scala-sbt:eclipse-temurin-21.0.7_6_1.11.3_3.7.1
 
@@ -20,8 +20,30 @@ jobs:
       - name: Run all benchmarks
         run: make bench_all
 
-      - name: Upload all benchmark results
+      - name: Upload all results
         uses: actions/upload-artifact@v4
         with:
-          name: benchmark-results
+          name: bench-all-results
+          path: analysis/data/
+
+  bench-custom:
+    name: Bench Custom
+    runs-on: ubuntu-latest
+    container:
+      image: sbtscala/scala-sbt:eclipse-temurin-21.0.7_6_1.11.3_3.7.1
+
+    steps:
+      - name: Install make
+        run: apt-get update && apt-get install -y make
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run custom benchmarks
+        run: make bench_custom
+
+      - name: Upload custom results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-custom-results
           path: analysis/data/

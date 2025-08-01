@@ -112,6 +112,6 @@ fig.update_layout(
 
 # Save
 os.makedirs("plots", exist_ok=True)
-# fig.write_html(html_path)
+fig.write_html(html_path)
 # fig.write_image(png_path, width=900, height=600)
 fig.show()

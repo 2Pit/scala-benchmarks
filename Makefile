@@ -26,10 +26,18 @@ bench.run:
 bench_map_1:
 	$(MAKE) bench.run BENCH_CLASS=MapBenchmark RESULT_FILE=analysis/data/bench_map_1.csv
 
+bench_map_3:
+	$(MAKE) bench.run BENCH_CLASS=Map3Benchmark RESULT_FILE=analysis/data/bench_map_3.csv
+
 bench_map_1_lam:
 	$(MAKE) bench.run BENCH_CLASS=MapLamBenchmark RESULT_FILE=analysis/data/bench_map_1_lam.csv
 
 bench_foreach:
 	$(MAKE) bench.run BENCH_CLASS=ForeachBenchmark RESULT_FILE=analysis/data/bench_foreach.csv
 
-bench_all: bench_map_1 bench_map_1_lam bench_foreach
+bench_foreach_lam:
+	$(MAKE) bench.run BENCH_CLASS=ForeachLamBenchmark RESULT_FILE=analysis/data/bench_foreach_lam.csv
+
+bench_all: bench_map_1 bench_map_1_lam bench_foreach bench_foreach_lam
+
+bench_custom: bench_map_1 bench_map_3 bench_foreach
