@@ -1,28 +1,26 @@
 # Latency Regression Analysis of `foreach` and `map` Variants
 
-This report presents regression analysis of latency measurements across different implementations of array-processing methods (`foreach`, `map`).
+This report presents a regression-based latency analysis of different implementations of array-processing methods in Scala (`map`, `foreach`).
 
-We test performance of various methods applied to `Array[Int]`:
+We benchmark methods operating on `Array[Int]`:
 - [`map`](https://github.com/2Pit/scala-benchmarks/blob/main/src/main/scala/benchmarks/Impl.scala#L7-L36)
 - [`foreach`](https://github.com/2Pit/scala-benchmarks/blob/main/src/main/scala/benchmarks/Impl.scala#L38-L61)
 
-The goal is to assess whether recent code changes improve performance and whether those improvements are significant depending on how the computation is passed (e.g., inlined vs lambda).
+The goal is to determine whether alternative loop implementations improve performance and whether these gains persist across call-site variants (e.g., direct function vs lambda).
 
 ---
 
 ## 🔬 Hypothesis
 
-We hypothesize that performance differences arise due to whether the function passed to `map` or `foreach` can be **statically resolved and specialized by the Scala compiler**.
+We hypothesize that the performance of `map` and `foreach` on primitive arrays depends on how the function is applied within the loop.
 
 In particular:
 
-- When a method like `newMap` directly applies the function `f` in a tight loop (without pattern-matching on array types), the JIT compiler has a better chance to emit **monomorphic, type-specific machine code**, especially for primitive arrays.
-- In contrast, implementations like `oldMap`, which pattern-match on `Array[_]` types and use a generic `f: A => B`, may lead to **virtual calls** or **boxed dispatch**, reducing performance.
-- Additionally, if the function `f` is **defined inline or as a known lambda**, the compiler may optimize better compared to when it's passed as an anonymous or preconstructed closure.
+- When the transformation function operates directly over `Array[Int]` with a simple loop, avoiding pattern-matching and casting, the implementation can remain tight and efficient.
+- This should result in **lower per-element latency**, which can be measured by a **smaller slope** in the linear regression of total latency over array size.
+- When the function is passed as a lambda (e.g., anonymous closure), performance benefits may vanish due to loss of compiler-level optimizations such as specialization or static dispatch.
 
-This should result in a **lower slope** of the latency curve (`ns/op per element`) in the new versions, where specialization and static dispatch are more likely.
-
-When such specialization is not possible — for example, due to erased types, type casting, or abstract lambdas — **performance improvements disappear**.
+This report compares multiple versions of `map` and `foreach` under these conditions and evaluates whether the differences are statistically significant.
 
 ---
 
