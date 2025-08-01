@@ -26,6 +26,29 @@ When such specialization is not possible — for example, due to erased types, t
 
 ---
 
+## ⚙️ Benchmark Configuration
+
+Benchmark settings are defined in the `Makefile` and were used consistently for all runs in this report. I executed the benchmarks manually via a dedicated GitHub Action.
+
+The configuration was as follows:
+
+```
+FORKS := 1
+
+SIZES_SHORT := 1,4,16,128,512
+SIZES_LONG  := 1000,10000
+
+WARMUP_ITER        := 4
+WARMUP_TIME_SHORT  := 1s
+WARMUP_TIME_LONG   := 2s
+
+MEASURE_ITER       := 6
+MEASURE_TIME_SHORT := 3s
+MEASURE_TIME_LONG  := 20s
+```
+
+---
+
 ## 📊 `foreach` vs `foreach_lam`
 
 | `foreach` | `foreach_lam` |
@@ -89,6 +112,9 @@ This reinforces the conclusion that compiler-assisted optimization plays a key r
 
 ## 🧾 Summary Table
 
+Each ratio below reflects the **latency per array element** in nanoseconds:
+how many times slower the old version is compared to the new one.
+
 | Variant         | Ratio (old / new) | p-value | Significant? |
 |----------------|-------------------|---------|--------------|
 | `foreach`       | 2.10              | 0.0002  | ✅ YES        |
@@ -104,11 +130,3 @@ This reinforces the conclusion that compiler-assisted optimization plays a key r
 - Optimizations introduced in the "new" versions significantly reduce the per-element latency in all cases **except** where lambdas are passed.
 - This strongly suggests that **compiler optimizations such as inlining or specialization are not applied to lambda-passed functions**.
 - When writing performance-critical code, prefer **direct call sites** or **specialized code paths** over generic lambdas.
-
----
-
-## 💡 Recommendations
-
-- Avoid passing lambdas in performance-critical inner loops.
-- Consider macro or inline alternatives if API flexibility is required.
-- Benchmark further on realistic workloads to ensure behavior generalizes.
