@@ -51,7 +51,7 @@ MEASURE_TIME_LONG  := 20s
 
 | `foreach` | `foreach_lam` |
 |-----------|---------------|
-| ![foreach](figures/foreach.png)<br>📈 [Interactive](../interactive/latency_foreach.html) | ![foreach_lam](figures/foreach_lam.png)<br>📈 [Interactive](../interactive/latency_foreach_lam.html) |
+| ![foreach](figures/foreach.png)<br>📈 [Interactive](interactive/latency_foreach.html) | ![foreach_lam](figures/foreach_lam.png)<br>📈 [Interactive](interactive/latency_foreach_lam.html) |
 
 ```
 new_foreach:     latency = (2.238 ± 0.139) + (0.124 ± 0.003) · size    [RMSE = 3.353 ns/op]
@@ -73,7 +73,7 @@ However, this effect disappears when a lambda is passed (`foreach_lam`), indicat
 
 | `map_1` | `map_1_lam` |
 |--------|-------------|
-| ![map_1](figures/map_1.png)<br>📈 [Interactive](../interactive/latency_map_1.html) | ![map_1_lam](figures/map_1_lam.png)<br>📈 [Interactive](../interactive/latency_map_1_lam.html) |
+| ![map_1](figures/map_1.png)<br>📈 [Interactive](interactive/latency_map_1.html) | ![map_1_lam](figures/map_1_lam.png)<br>📈 [Interactive](interactive/latency_map_1_lam.html) |
 
 ```
 new_map_1:       latency = (11.546 ± 2.261) + (0.817 ± 0.093) · size    [RMSE = 475.346 ns/op]
@@ -95,7 +95,7 @@ In contrast, when a lambda is used (`map_1_lam`), the function is opaque to the 
 ## 📊 `map_3` Comparison
 
 ![map_3](figures/map_3.png)
-📈 [Interactive version](../interactive/latency_map_3.html)
+📈 [Interactive version](interactive/latency_map_3.html)
 
 ```
 new_map_3:       latency = (32.980 ± 5.107) + (2.465 ± 0.198) · size    [RMSE = 2482.882 ns/op]
