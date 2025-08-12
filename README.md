@@ -2,7 +2,8 @@
 
 This project is designed to benchmark and analyze the performance of various methods implemented in a Scala library for array transformations. It focuses on comparing different low-level implementations of `map`, `foreach`, and other traversal operations, aiming to detect performance differences depending on call site structure and compiler behavior.
 
-Full perfomance review you can find [here](review/array_map_foreach/README.md).
+Full performance review you can find [here](review/array_map_foreach/README.md).
+Discussion in Scala 3 repo located [here](https://github.com/scala/scala3/discussions/23649).
 
 We test performance of various methods applied to `Array[Int]`:
 - [`map`](https://github.com/2Pit/scala-benchmarks/blob/main/src/main/scala/benchmarks/Impl.scala#L7-L36)
