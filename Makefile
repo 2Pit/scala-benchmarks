@@ -16,9 +16,9 @@ bench.run:
 	@echo "Running ${BENCH_CLASS} → ${RESULT_FILE}"; \
 	rm -f ${RESULT_FILE} ${RESULT_FILE}.tmp; \
 	echo "Short sizes..."; \
-	sbt "jmh:run -i $(MEASURE_ITER) -wi $(WARMUP_ITER) -r $(MEASURE_TIME_SHORT) -w $(WARMUP_TIME_SHORT) -f$(FORKS) -t1 \".*${BENCH_CLASS}.*\" -p size=$(SIZES_SHORT) -rf csv -rff ${RESULT_FILE}" || exit $$?; \
+	sbt "jmh:run -i $(MEASURE_ITER) -wi $(WARMUP_ITER) -r $(MEASURE_TIME_SHORT) -w $(WARMUP_TIME_SHORT) -f$(FORKS) -t1 \".*${BENCH_CLASS}.*\" -p size=$(SIZES_SHORT) -prof \"gc:churn=false;churnWait=400\" -rf csv -rff ${RESULT_FILE}" || exit $$?; \
 	echo "Long sizes..."; \
-	sbt "jmh:run -i $(MEASURE_ITER) -wi $(WARMUP_ITER) -r $(MEASURE_TIME_LONG) -w $(WARMUP_TIME_LONG) -f$(FORKS) -t1 \".*${BENCH_CLASS}.*\" -p size=$(SIZES_LONG) -rf csv -rff ${RESULT_FILE}.tmp" || exit $$?; \
+	sbt "jmh:run -i $(MEASURE_ITER) -wi $(WARMUP_ITER) -r $(MEASURE_TIME_LONG) -w $(WARMUP_TIME_LONG) -f$(FORKS) -t1 \".*${BENCH_CLASS}.*\" -p size=$(SIZES_LONG) -prof \"gc:churn=false;churnWait=400\" -rf csv -rff ${RESULT_FILE}.tmp" || exit $$?; \
 	tail -n +2 ${RESULT_FILE}.tmp >> ${RESULT_FILE}; \
 	rm -f ${RESULT_FILE}.tmp
 
@@ -36,5 +36,8 @@ bench_foreach:
 
 bench_foreach_lam:
 	$(MAKE) bench.run BENCH_CLASS=ForeachLamBenchmark RESULT_FILE=analysis/data/bench_foreach_lam.csv
+
+bench_repo_map:
+	$(MAKE) bench.run BENCH_CLASS=RepoBenchmark RESULT_FILE=analysis/data/bench_repo_map.csv
 
 bench_all: bench_map_1 bench_map_1_lam bench_foreach bench_foreach_lam

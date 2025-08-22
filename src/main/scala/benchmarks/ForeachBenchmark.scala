@@ -1,27 +1,26 @@
 package benchmarks
 
-import org.openjdk.jmh.annotations.*
+import org.openjdk.jmh.annotations._
 import org.openjdk.jmh.infra.Blackhole
 import java.util.concurrent.TimeUnit
-import scala.compiletime.uninitialized
+import benchmarks.ArrayOpsCompat._
+// import scala.compiletime.uninitialized
 
 import scala.reflect.ClassTag
 
 @State(Scope.Thread)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-class ForeachBenchmark:
+class ForeachBenchmark {
 
   @Param(Array("1", "10", "100", "10000"))
-  var size: Int = uninitialized
+  var size: Int = _
 
-  var array: Array[Int] = uninitialized
+  var array: Array[Int] = _
 
   @Setup
   def setup(): Unit = {
     array = Array.fill(size)(1)
-    System.gc()
-    Thread.sleep(400) // чтобы GC успел пройти
   }
 
   def heavy(x: Int): Int = Math.sqrt(x.toDouble).toInt
@@ -33,3 +32,4 @@ class ForeachBenchmark:
   @Benchmark
   def new_foreach(bh: Blackhole): Unit =
     array.newForeach(bh.consume)
+}
